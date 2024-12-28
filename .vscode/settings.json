@@ -1,0 +1,35 @@
+{
+	// This file needs to be in the .vscode folder in the root of the project, not in the theme folder.
+	"phpsab.executablePathCS": "wp-content/themes/cu-classic-theme/vendor/bin/phpcs",
+	"phpsab.executablePathCBF": "wp-content/themes/cu-classic-theme/vendor/bin/phpcbf",
+	"phpsab.allowedAutoRulesets": [".phpcs.xml", ".phpcs.xml.dist", "phpcs.xml", "phpcs.xml.dist", "phpcs.ruleset.xml", "ruleset.xml"],
+	"phpsab.debug": false,
+	"[php]": {
+		"editor.defaultFormatter": "valeryanm.vscode-phpsab"
+	},
+	"workbench.startupEditor": "none",
+	"git.enableSmartCommit": true,
+	"git.confirmSync": false,
+	"git.autofetch": true,
+	"explorer.confirmDelete": true,
+	"files.autoSave": "afterDelay",
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"php.validate.run": "onType",
+	"php.suggest.basic": false,
+	"css.validate": false,
+	"less.validate": false,
+	"scss.validate": false,
+	"stylelint.validate": ["css", "scss"],
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[scss]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"php.validate.enable": false
+}
