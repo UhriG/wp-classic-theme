@@ -1,0 +1,25 @@
+{
+	"name": "cristianuhrig/cu-classic-theme",
+	"description": "A classic WordPress theme with Composer autoloading",
+	"type": "project",
+	"license": "GPL-2.0-or-later",
+	"autoload": {
+		"psr-4": {
+			"CUCT\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Cristian Uhrig"
+		}
+	],
+	"minimum-stability": "stable",
+	"require-dev": {
+		"composer/installers": "^2.3"
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true
+		}
+	}
+}
