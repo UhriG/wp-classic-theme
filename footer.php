@@ -1,6 +1,15 @@
+<?php
+/**
+ * The footer for our theme.
+ *
+ * @package CUCT
+ */
+
+?>
+
 <footer>
-        <p>&copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?></p>
-    </footer>
-    <?php wp_footer(); ?>
+		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></p>
+	</footer>
+	<?php wp_footer(); ?>
 </body>
 </html>
