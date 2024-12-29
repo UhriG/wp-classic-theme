@@ -1,10 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {
-	const mobileMenuButton = document.getElementById('mobile-menu-button');
-	const mobileMenu = document.getElementById('mobile-menu');
+import Navbar from './components/Navbar';
 
-	if (mobileMenuButton && mobileMenu) {
-		mobileMenuButton.addEventListener('click', function () {
-			mobileMenu.classList.toggle('hidden');
-		});
-	}
+document.addEventListener('DOMContentLoaded', () => {
+    new Navbar();
 });

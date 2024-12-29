@@ -8,6 +8,10 @@
 namespace CUCT\Setup;
 
 use CUCT\Customizer\Hero;
+use CUCT\Customizer\Footer;
+use CUCT\Customizer\Header;
+use CUCT\Customizer\About;
+use CUCT\Customizer\Home;
 
 /**
  * ThemeSupport.
@@ -23,7 +27,10 @@ class ThemeSupport {
 		add_filter( 'nav_menu_link_attributes', array( $this, 'add_menu_link_class' ), 10, 4 );
 
 		// Initialize Customizer classes.
-		new Hero();
+		new Home();
+		new Footer();
+		new Header();
+		new About();
 	}
 
 	/**

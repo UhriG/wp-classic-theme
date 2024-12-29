@@ -1,0 +1,27 @@
+.mobile-menu {
+	z-index: 40;
+	visibility: hidden;
+	opacity: 0;
+	transform: translateY(-1rem);
+	transition: all 0.3s ease-in-out;
+
+	&.is-active {
+		visibility: visible;
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+#mobile-menu-button {
+	position: relative;
+	z-index: 50;
+
+	&.is-active {
+		@apply text-blue-600 border-blue-600;
+	}
+}
+
+.navbar-brand {
+	position: relative;
+	z-index: 50;
+}

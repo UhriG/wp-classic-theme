@@ -30,46 +30,87 @@ class Hero {
 		$wp_customize->add_section(
 			'hero_section',
 			array(
-				'title'    => __( 'Hero Section', 'cu-classic-theme' ),
+				'title'    => __( 'Global Hero Section', 'cu-classic-theme' ),
 				'priority' => 30,
 			)
 		);
 
-		$this->add_title_setting( $wp_customize );
-		$this->add_description_setting( $wp_customize );
+		// Home Hero Settings.
+		$this->add_hero_settings( $wp_customize, 'hero_section', 'hero', __( 'Home Hero Title', 'cu-classic-theme' ), __( 'Home Hero Description', 'cu-classic-theme' ) );
+
+		// About Page Hero Settings.
+		$wp_customize->add_section(
+			'about_hero_section',
+			array(
+				'title'    => __( 'About Page Hero', 'cu-classic-theme' ),
+				'priority' => 35,
+			)
+		);
+
+		$this->add_hero_settings( $wp_customize, 'about_hero_section', 'about_hero', __( 'About Hero Title', 'cu-classic-theme' ), __( 'About Hero Description', 'cu-classic-theme' ) );
+
+		// Page Hero Settings.
+		$wp_customize->add_section(
+			'page_hero_section',
+			array(
+				'title'    => __( 'Page Hero', 'cu-classic-theme' ),
+				'priority' => 40,
+			)
+		);
+
+		$this->add_hero_settings( $wp_customize, 'page_hero_section', 'page_hero', __( 'Page Hero Title', 'cu-classic-theme' ), __( 'Page Hero Description', 'cu-classic-theme' ) );
+	}
+
+	/**
+	 * Add hero settings to a section
+	 *
+	 * @param \WP_Customize_Manager $wp_customize Customizer instance.
+	 * @param string                $section_id Section to add hero settings to.
+	 * @param string                $setting_prefix Prefix for the setting IDs.
+	 * @param string                $title_label Label for title field.
+	 * @param string                $description_label Label for description field.
+	 * @return void
+	 */
+	public function add_hero_settings( $wp_customize, $section_id, $setting_prefix, $title_label, $description_label ) {
+		$this->add_title_setting( $wp_customize, $setting_prefix . '_title', $title_label, $section_id );
+		$this->add_description_setting( $wp_customize, $setting_prefix . '_description', $description_label, $section_id );
 	}
 
 	/**
 	 * Add title setting and control
 	 *
 	 * @param \WP_Customize_Manager $wp_customize WordPress customizer object.
-	 * @return void
+	 * @param string                $setting_id Setting ID.
+	 * @param string                $label Control label.
+	 * @param string                $section Section ID (optional).
 	 */
-	private function add_title_setting( $wp_customize ) {
+	private function add_title_setting( $wp_customize, $setting_id, $label, $section = 'hero_section' ) {
 		$wp_customize->add_setting(
-			'hero_title',
+			$setting_id,
 			array(
-				'default'           => __( 'Welcome to our site', 'cu-classic-theme' ),
+				'default'           => '',
 				'sanitize_callback' => 'sanitize_text_field',
 				'transport'         => 'postMessage',
 			)
 		);
 
 		$wp_customize->add_control(
-			'hero_title',
+			$setting_id,
 			array(
-				'label'   => __( 'Hero Title', 'cu-classic-theme' ),
-				'section' => 'hero_section',
+				'label'   => $label,
+				'section' => $section,
 				'type'    => 'text',
 			)
 		);
 
 		$wp_customize->selective_refresh->add_partial(
-			'hero_title',
+			$setting_id,
 			array(
-				'selector'            => '.hero-title',
+				'selector'            => ".hero-title[data-hero='{$setting_id}']",
 				'container_inclusive' => false,
-				'render_callback'     => array( $this, 'render_hero_title' ),
+				'render_callback'     => function () use ( $setting_id ) {
+					return esc_html( get_theme_mod( $setting_id ) );
+				},
 			)
 		);
 	}
@@ -78,33 +119,37 @@ class Hero {
 	 * Add description setting and control
 	 *
 	 * @param \WP_Customize_Manager $wp_customize WordPress customizer object.
-	 * @return void
+	 * @param string                $setting_id Setting ID.
+	 * @param string                $label Control label.
+	 * @param string                $section Section ID (optional).
 	 */
-	private function add_description_setting( $wp_customize ) {
+	private function add_description_setting( $wp_customize, $setting_id, $label, $section = 'hero_section' ) {
 		$wp_customize->add_setting(
-			'hero_description',
+			$setting_id,
 			array(
-				'default'           => __( 'Discover amazing content', 'cu-classic-theme' ),
+				'default'           => '',
 				'sanitize_callback' => 'sanitize_textarea_field',
 				'transport'         => 'postMessage',
 			)
 		);
 
 		$wp_customize->add_control(
-			'hero_description',
+			$setting_id,
 			array(
-				'label'   => __( 'Hero Description', 'cu-classic-theme' ),
-				'section' => 'hero_section',
+				'label'   => $label,
+				'section' => $section,
 				'type'    => 'textarea',
 			)
 		);
 
 		$wp_customize->selective_refresh->add_partial(
-			'hero_description',
+			$setting_id,
 			array(
-				'selector'            => '.hero-description',
+				'selector'            => ".hero-description[data-hero='{$setting_id}']",
 				'container_inclusive' => false,
-				'render_callback'     => array( $this, 'render_hero_description' ),
+				'render_callback'     => function () use ( $setting_id ) {
+					return esc_html( get_theme_mod( $setting_id ) );
+				},
 			)
 		);
 	}
