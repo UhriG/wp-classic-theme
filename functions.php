@@ -9,3 +9,4 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 new CUCT\Setup\ThemeSupport();
+new CUCT\Setup\Assets();
